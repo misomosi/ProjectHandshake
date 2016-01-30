@@ -1,0 +1,11 @@
+Implement start phase
+
+implement grip success / fail
+
+implement wave logic
+
+implement AI movement
+
+implement grip strength window
+
+Game logic, scoring, level advancement

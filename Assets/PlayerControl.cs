@@ -18,6 +18,7 @@ public class PlayerControl : MonoBehaviour {
 
 	private GripBar gripBar;
 	private SpriteRenderer handSprite;
+	
 	// Use this for initialization
 	void Start () {
 		Debug.Log ("Hello");
@@ -30,10 +31,9 @@ public class PlayerControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		float mouseY = Input.mousePosition.y - initialMousePos.y;
-		Debug.Log (mouseY);
+		Vector2 mousePos = Camera.main.ScreenPointToRay (Input.mousePosition).origin;
 		Vector2 pos = transform.position;
-		pos.y = mouseY * verticalVelocityScale;
+		pos.y = mousePos.y; // * verticalVelocityScale;
 
 		// Add forward velocity when the player hold accelerator
 		if (Input.GetButton ("Accelerate")) {
