@@ -17,7 +17,7 @@ public class PlayerControl : MonoBehaviour {
 
 
 	private GripBar gripBar;
-
+	private SpriteRenderer handSprite;
 	// Use this for initialization
 	void Start () {
 		Debug.Log ("Hello");
@@ -25,6 +25,7 @@ public class PlayerControl : MonoBehaviour {
 		initialMousePos = Input.mousePosition;
 
 		gripBar = Object.FindObjectOfType<GripBar> ();
+		handSprite = GetComponentInChildren<SpriteRenderer> ();
 	}
 	
 	// Update is called once per frame
@@ -35,18 +36,20 @@ public class PlayerControl : MonoBehaviour {
 		pos.y = mouseY * verticalVelocityScale;
 
 		// Add forward velocity when the player hold accelerator
-		if (Input.GetButton ("Jump")) {
+		if (Input.GetButton ("Accelerate")) {
 			speed += forwardAcceleration * Time.deltaTime;
-			Debug.Log ("Accelerate");
 		} else {
 			if (Mathf.Abs (speed) < minSpeed)
 				speed = 0;
 		}
-			
 		speed -= speed * friction;
-
 		pos.x += speed * Time.deltaTime;
 
+		// Handle gripping
+		if (Input.GetButtonDown ("Grip")) {
+			isGrab = true;
+			handSprite.color = Color.red;
+		}
 
 		transform.position = pos;
 	}
