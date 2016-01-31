@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum gameStage {Intro,Tutorial,Baby,HighSchool,Boss,GameOver};
 public class MasterGame : MonoBehaviour {
 
 	// Use this for initialization
@@ -8,7 +9,7 @@ public class MasterGame : MonoBehaviour {
 
 	//main game variables used to switch between different levels and control game progression.
 
-	public enum gameStage {Intro,Tutorial,Baby,HighSchool,Boss,GameOver};
+
 	public enum handStage {ReadyGo,Joust,AutoCenter,Shake,Success,Failure};
 	[Header("MainGame")]
 	public bool gameOver = false;
@@ -59,5 +60,8 @@ public class MasterGame : MonoBehaviour {
 	}
 
 	//functions here, if needed
+	public void HandFailure(){
+		currentHandStage = handStage.Failure;
+	}
 
 }
