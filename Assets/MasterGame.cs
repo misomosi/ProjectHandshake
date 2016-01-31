@@ -88,7 +88,7 @@ Failure}
 	[Header ("PlayerHand")]
 	bool isGrab;
 	float handShakeX;
-	public float handAutoDragSpeed;
+	public float AutoCenterTime = 2.0f;
 	public PlayerControl player;
 	public OpponentControl opponent;
 	bool autoCenterComplete = false;
@@ -138,8 +138,9 @@ Failure}
 	void OnAutoCenter() {
 		player.StopAllCoroutines ();
 		opponent.StopAllCoroutines ();
+
 		player.SendMessage ("AutoCenter");
-		opponent.SendMessage ("AutoCenter");
+		Destroy (opponent.gameObject);
 	}
 
 	void OnShake() {

@@ -21,14 +21,10 @@ public class PlayerControl : MonoBehaviour {
 	[Header("Shake Stage")]
 	public float shakeMouseSensitivity = 1.0f;
 
-
-	public enum phase
-	{
-		approach,
-		shake
-	}
 	[Header("General")]
-	public phase currentPhase = phase.approach;
+	public Sprite openImage;
+	public Sprite claspedImageSucces;
+	public Sprite claspedImageFailure;
 
 	private GripBar gripBar;
 	private SpriteRenderer handSprite;
@@ -42,6 +38,7 @@ public class PlayerControl : MonoBehaviour {
 		gripBar = Object.FindObjectOfType<GripBar> ();
 		handSprite = GetComponentInChildren<SpriteRenderer> ();
 		opponent = Object.FindObjectOfType<OpponentControl> ();
+		handSprite.sprite = openImage;
 	}
 	
 	// Update is called once per frame
@@ -96,11 +93,15 @@ public class PlayerControl : MonoBehaviour {
 
 	// Coroutine that moves the hand towards the center of the screen
 	IEnumerator DoAutoCenter() {
-		float maxCenterSpeed = MasterGame.instance.handAutoDragSpeed;
+		float maxTime = MasterGame.instance.AutoCenterTime;
+		float t = 0;
+		Vector2 startPos = transform.position;
+		AnimationCurve easeEvaluator = AnimationCurve.EaseInOut (0, 0, maxTime, 1);
 
 		while (Vector2.Distance(transform.position, Vector2.zero) > Mathf.Epsilon) {
-			// Move towards the center
-			transform.position = Vector2.MoveTowards (transform.position, Vector2.zero, maxCenterSpeed * Time.deltaTime);
+			// Ease towards the center
+			transform.position = Vector2.Lerp(startPos, Vector2.zero, easeEvaluator.Evaluate(t));
+			t += Time.deltaTime;
 			yield return null;
 		}
 		transform.position = Vector2.zero;
@@ -124,10 +125,12 @@ public class PlayerControl : MonoBehaviour {
 			speed = 0;
 			//handSprite.color = Color.green;
 			// Move to next phase
+			handSprite.sprite = claspedImageSucces;
 			MasterGame.instance.currentHandStage = MasterGame.handStage.AutoCenter;
+
 		} else {
 			// Failed to grip correctly
-			handSprite.color = Color.red;
+			handSprite.sprite = claspedImageFailure;
 			MasterGame.instance.currentHandStage = MasterGame.handStage.Failure;
 		}
 

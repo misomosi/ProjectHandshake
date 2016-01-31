@@ -47,6 +47,7 @@ public class OpponentControl : MonoBehaviour {
 		}
 	}
 
+	/*
 	public void AutoCenter() {
 		StartCoroutine (DoAutoCenter ());
 	}
@@ -63,4 +64,5 @@ public class OpponentControl : MonoBehaviour {
 		}
 		transform.position = Vector2.zero;
 	}
+	*/
 }
