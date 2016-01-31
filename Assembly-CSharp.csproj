@@ -114,6 +114,7 @@
      <Compile Include="Assets\GripBar.cs" />
      <Compile Include="Assets\MasterGame.cs" />
      <Compile Include="Assets\Momentum.cs" />
+     <Compile Include="Assets\MusicManager.cs" />
      <Compile Include="Assets\OpponentControl.cs" />
      <Compile Include="Assets\OpponentEmotion.cs" />
      <Compile Include="Assets\PlayerControl.cs" />

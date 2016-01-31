@@ -33,6 +33,10 @@ public class PlayerControl : MonoBehaviour {
 	private SpriteRenderer handSprite;
 	private SpriteRenderer oppSprite;
 
+	private AudioSource handGood01;
+	private AudioSource handGood02;
+	private AudioSource handBad;
+
 	// Use this for initialization
 	void Start () {
 		Debug.Log ("Hello");
@@ -46,6 +50,10 @@ public class PlayerControl : MonoBehaviour {
 
 		oppSprite = GetComponentInChildren<SpriteRenderer> ();
 		oppSprite.sprite = openImage;
+
+		handGood01 = GameObject.Find ("HandGood01").GetComponent<AudioSource> ();
+		handGood02 = GameObject.Find ("HandGood02").GetComponent<AudioSource> ();
+		handBad = GameObject.Find ("HandBad").GetComponent<AudioSource> ();
 	}
 	
 	// Update is called once per frame
@@ -139,11 +147,14 @@ public class PlayerControl : MonoBehaviour {
 			// Move to next phase
 			handSprite.sprite = claspedImageSucces;
 			MasterGame.instance.currentHandStage = MasterGame.handStage.AutoCenter;
+			handGood01.Play ();
+			handGood02.Play ();
 
 		} else {
 			// Failed to grip correctly
 			handSprite.sprite = claspedImageFailure;
 			MasterGame.instance.currentHandStage = MasterGame.handStage.Failure;
+			handBad.Play ();
 		}
 
 	}
