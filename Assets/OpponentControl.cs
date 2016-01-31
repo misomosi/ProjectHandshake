@@ -12,23 +12,57 @@ public class OpponentControl : MonoBehaviour {
 	}
 	public float tSpeed = 1.0f;
 	public phase currentPhase = phase.approach;
-	private float t = 0;
+
+	void OnAwake() {
+		path = GameObject.Find ("OpponentCurve").GetComponent<BezierCurve> ();
+	}
 
 	// Use this for initialization
 	void Start () {
-		path = GameObject.Find ("OpponentCurve").GetComponent<BezierCurve> ();
+		
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void UpdateDISABLED () {
 		if (currentPhase == phase.approach) {
-			DoApproach ();
+			Joust ();
 		}
 	}
 
-	void DoApproach() {
-		t += tSpeed * Time.deltaTime;
-		Vector2 p = path.GetPointAt (t);
-		transform.position = p;
+	void Joust() {
+		StartCoroutine (DoJoust ());
 	}
+
+	IEnumerator DoJoust() {
+		float t = 0;
+		if (!path) {
+			path = GameObject.Find ("OpponentCurve").GetComponent<BezierCurve> ();
+		}
+		while (MasterGame.instance.currentHandStage == MasterGame.handStage.Joust) {
+			t += tSpeed * Time.deltaTime;
+			t = Mathf.Clamp (t, 0, 0.99f);
+			Vector2 p = path.GetPointAt (t);
+			transform.position = p;
+			yield return null;
+		}
+	}
+
+	/*
+	public void AutoCenter() {
+		StartCoroutine (DoAutoCenter ());
+	}
+
+	// Coroutine that moves the hand towards the center of the screen
+	IEnumerator DoAutoCenter() {
+		bool complete = false;
+		float maxCenterSpeed = MasterGame.instance.handAutoDragSpeed;
+
+		while (Vector2.Distance(transform.position, Vector2.zero) > Mathf.Epsilon) {
+			// Move towards the center
+			transform.position = Vector2.MoveTowards (transform.position, Vector2.zero, maxCenterSpeed * Time.deltaTime);
+			yield return null;
+		}
+		transform.position = Vector2.zero;
+	}
+	*/
 }

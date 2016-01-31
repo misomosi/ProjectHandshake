@@ -21,14 +21,10 @@ public class PlayerControl : MonoBehaviour {
 	[Header("Shake Stage")]
 	public float shakeMouseSensitivity = 1.0f;
 
-
-	public enum phase
-	{
-		approach,
-		shake
-	}
 	[Header("General")]
-	public phase currentPhase = phase.approach;
+	public Sprite openImage;
+	public Sprite claspedImageSucces;
+	public Sprite claspedImageFailure;
 
 	private GripBar gripBar;
 	private SpriteRenderer handSprite;
@@ -42,16 +38,17 @@ public class PlayerControl : MonoBehaviour {
 		gripBar = Object.FindObjectOfType<GripBar> ();
 		handSprite = GetComponentInChildren<SpriteRenderer> ();
 		opponent = Object.FindObjectOfType<OpponentControl> ();
+		handSprite.sprite = openImage;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		switch (currentPhase) {
-		case phase.approach:
+		switch (MasterGame.instance.currentHandStage) {
+		case MasterGame.handStage.Joust:
 			DoMovementPhase();
 			break;
 
-		case phase.shake:
+		case MasterGame.handStage.Shake:
 			DoShakePhase();
 			break;
 		}
@@ -90,6 +87,27 @@ public class PlayerControl : MonoBehaviour {
 		transform.position = pos;
 	}
 
+	public void AutoCenter() {
+		StartCoroutine (DoAutoCenter ());
+	}
+
+	// Coroutine that moves the hand towards the center of the screen
+	IEnumerator DoAutoCenter() {
+		float maxTime = MasterGame.instance.AutoCenterTime;
+		float t = 0;
+		Vector2 startPos = transform.position;
+		AnimationCurve easeEvaluator = AnimationCurve.EaseInOut (0, 0, maxTime, 1);
+
+		while (Vector2.Distance(transform.position, Vector2.zero) > Mathf.Epsilon) {
+			// Ease towards the center
+			transform.position = Vector2.Lerp(startPos, Vector2.zero, easeEvaluator.Evaluate(t));
+			t += Time.deltaTime;
+			yield return null;
+		}
+		transform.position = Vector2.zero;
+		MasterGame.instance.currentHandStage = MasterGame.handStage.Shake;
+	}
+
 	void DoShakePhase() {
 		Vector3 playerInput = new Vector3(0, Input.GetAxis ("Mouse Y") * shakeMouseSensitivity, 0);
 		transform.position += playerInput;
@@ -111,12 +129,15 @@ public class PlayerControl : MonoBehaviour {
 		if (Vector2.Distance(myGripPos, otherGripPos) < myGripPointObj.GetComponent<CircleCollider2D> ().radius) {
 			// We're in range!!
 			speed = 0;
-			handSprite.color = Color.green;
+			//handSprite.color = Color.green;
 			// Move to next phase
-			currentPhase = phase.shake;
+			handSprite.sprite = claspedImageSucces;
+			MasterGame.instance.currentHandStage = MasterGame.handStage.AutoCenter;
+
 		} else {
 			// Failed to grip correctly
-			handSprite.color = Color.red;
+			handSprite.sprite = claspedImageFailure;
+			MasterGame.instance.currentHandStage = MasterGame.handStage.Failure;
 		}
 
 	}
