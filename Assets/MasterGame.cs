@@ -209,6 +209,9 @@ public class MasterGame : MonoBehaviour
 	public void LoadNextScene () {
 		Scene currentScene = SceneManager.GetActiveScene ();
 		_instance = null;
-		SceneManager.LoadScene (currentScene.buildIndex + 1);
+		if (currentScene.buildIndex == 3)
+			Application.Quit ();
+		else
+			SceneManager.LoadScene (currentScene.buildIndex + 1);
 	}
 }
