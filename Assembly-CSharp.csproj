@@ -115,6 +115,7 @@
      <Compile Include="Assets\Momentum.cs" />
      <Compile Include="Assets\OpponentControl.cs" />
      <Compile Include="Assets\PlayerControl.cs" />
+     <Compile Include="Assets\ShakeZone.cs" />
      <None Include="Assets\Ferr\2DTerrain\Shaders\UnlitColoredTint.shader" />
      <None Include="Assets\Ferr\Common\Data\cache.txt" />
      <None Include="Assets\Ferr\2DTerrain\Shaders\UnitColoredTransparent.shader" />

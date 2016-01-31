@@ -99,7 +99,7 @@ GameObject:
   - 114: {fileID: 641540745}
   - 114: {fileID: 641540750}
   m_Layer: 0
-  m_Name: ShakeZone01
+  m_Name: ShakeZone03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
