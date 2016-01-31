@@ -23,6 +23,14 @@ public class MusicManager : MonoBehaviour {
 			joustAudio.volume = 0.0f;
 			shakeAudio.volume = 1.0f;
 			break;
+		case MasterGame.handStage.Failure:
+			joustAudio.volume = 0.0f;
+			shakeAudio.volume = 0.0f;
+			break;
+		case MasterGame.handStage.Success:
+			joustAudio.volume = 0.0f;
+			shakeAudio.volume = 0.0f;
+			break;
 		}
 
 

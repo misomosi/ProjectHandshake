@@ -83,11 +83,17 @@ public class MasterGame : MonoBehaviour
 	public float centerX = 0;
 	public float centerY = 0;
 
+	private AudioSource winSound;
+	private AudioSource loseSound;
+	private bool hasPlayedOnce = false;
+
 	void Awake() {
 		// Find the objects in the scene
 		player = Object.FindObjectOfType<PlayerControl> ();
 		opponent = Object.FindObjectOfType<OpponentControl> ();
 		shakezone = Object.FindObjectOfType<ShakeZone> ();
+		winSound = GameObject.Find ("WinEffect").GetComponent<AudioSource>();
+		loseSound = GameObject.Find ("LoseEffect").GetComponent<AudioSource>();
 
 		// Determine which level this is
 		
@@ -141,12 +147,19 @@ public class MasterGame : MonoBehaviour
 	}
 
 	void OnSuccess() {
-		
+		if (!hasPlayedOnce) {
+			winSound.Play ();
+			hasPlayedOnce = true;
+		}
+
 	}
 
 	void OnFailure() {
 		gameOver = true;
-
+		if (!hasPlayedOnce) {
+			loseSound.Play ();
+			hasPlayedOnce = true;
+		}
 		// Show the failure screen
 	}
 
