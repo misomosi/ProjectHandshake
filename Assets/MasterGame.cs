@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public enum gameStage {Intro,Tutorial,Baby,HighSchool,Boss,GameOver};
 public class MasterGame : MonoBehaviour
@@ -8,12 +9,14 @@ public class MasterGame : MonoBehaviour
 	// Singleton behavior
 	public static MasterGame instance {
 		get {
+			/*
 			if (applicationIsQuitting) {
 				Debug.LogWarning ("[Singleton] Instance MasterGame '" +
 				"' already destroyed on application quit." +
 				" Won't create again - returning null.");
 				return null;
 			}
+			*/
 			if (_instance == null) {
 				_instance = FindObjectOfType<MasterGame> ();
 			}
@@ -85,6 +88,9 @@ public class MasterGame : MonoBehaviour
 		player = Object.FindObjectOfType<PlayerControl> ();
 		opponent = Object.FindObjectOfType<OpponentControl> ();
 		shakezone = Object.FindObjectOfType<ShakeZone> ();
+
+		// Determine which level this is
+		
 	}
 
 	void Start ()
@@ -152,5 +158,23 @@ public class MasterGame : MonoBehaviour
 	public void OnDestroy ()
 	{
 		applicationIsQuitting = true;
+	}
+
+	public void Update () {
+		if (Input.GetKeyDown ("r")) {
+			Restart ();
+		}
+	}
+
+	public void Restart () {
+		Scene currentScene = SceneManager.GetActiveScene ();
+		_instance = null;
+		SceneManager.LoadScene (currentScene.buildIndex);
+	}
+
+	public void LoadNextScene () {
+		Scene currentScene = SceneManager.GetActiveScene ();
+		_instance = null;
+		SceneManager.LoadScene (currentScene.buildIndex + 1);
 	}
 }
