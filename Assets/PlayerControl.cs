@@ -46,12 +46,12 @@ public class PlayerControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		switch (currentPhase) {
-		case phase.approach:
+		switch (MasterGame.instance.currentHandStage) {
+		case MasterGame.handStage.Joust:
 			DoMovementPhase();
 			break;
 
-		case phase.shake:
+		case MasterGame.handStage.Shake:
 			DoShakePhase();
 			break;
 		}
@@ -90,6 +90,23 @@ public class PlayerControl : MonoBehaviour {
 		transform.position = pos;
 	}
 
+	public void AutoCenter() {
+		StartCoroutine (DoAutoCenter ());
+	}
+
+	// Coroutine that moves the hand towards the center of the screen
+	IEnumerator DoAutoCenter() {
+		float maxCenterSpeed = MasterGame.instance.handAutoDragSpeed;
+
+		while (Vector2.Distance(transform.position, Vector2.zero) > Mathf.Epsilon) {
+			// Move towards the center
+			transform.position = Vector2.MoveTowards (transform.position, Vector2.zero, maxCenterSpeed * Time.deltaTime);
+			yield return null;
+		}
+		transform.position = Vector2.zero;
+		MasterGame.instance.currentHandStage = MasterGame.handStage.Shake;
+	}
+
 	void DoShakePhase() {
 		Vector3 playerInput = new Vector3(0, Input.GetAxis ("Mouse Y") * shakeMouseSensitivity, 0);
 		transform.position += playerInput;
@@ -105,12 +122,13 @@ public class PlayerControl : MonoBehaviour {
 		if (Vector2.Distance(myGripPos, otherGripPos) < myGripPointObj.GetComponent<CircleCollider2D> ().radius) {
 			// We're in range!!
 			speed = 0;
-			handSprite.color = Color.green;
+			//handSprite.color = Color.green;
 			// Move to next phase
-			currentPhase = phase.shake;
+			MasterGame.instance.currentHandStage = MasterGame.handStage.AutoCenter;
 		} else {
 			// Failed to grip correctly
 			handSprite.color = Color.red;
+			MasterGame.instance.currentHandStage = MasterGame.handStage.Failure;
 		}
 
 	}
