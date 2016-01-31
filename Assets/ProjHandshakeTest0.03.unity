@@ -1072,9 +1072,10 @@ GameObject:
   - 4: {fileID: 1148786905}
   - 58: {fileID: 1148786906}
   - 212: {fileID: 1148786907}
+  - 50: {fileID: 1148786908}
   m_Layer: 0
   m_Name: GripPoint
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1104,7 +1105,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0.06, y: -0.09}
   serializedVersion: 2
-  m_Radius: 1.74
+  m_Radius: 1.56
 --- !u!212 &1148786907
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1135,6 +1136,23 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 0.484}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!50 &1148786908
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1148786904}
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1204210079
 GameObject:
   m_ObjectHideFlags: 0

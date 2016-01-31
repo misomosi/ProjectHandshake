@@ -44,7 +44,7 @@ public class ShakeZone : MonoBehaviour {
 		percentHealth = currentHealth / maxHealth;
 
 		if (currentHealth <= 0) {
-			print ("GAME OVER");
+			MasterGame.instance.currentHandStage = MasterGame.handStage.Failure;
 		}
 
 		GetComponent<Ferr2DT_PathTerrain> ().vertexColor = Color.Lerp (emptyColor, fullColor, percentHealth);
