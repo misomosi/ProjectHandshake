@@ -73,18 +73,22 @@ public class MasterGame : MonoBehaviour
 	public float AutoCenterTime = 2.0f;
 	public PlayerControl player;
 	public OpponentControl opponent;
+	public ShakeZone shakezone;
 	bool autoCenterComplete = false;
 
 	[Header ("Screen Constants")]
 	public float centerX = 0;
 	public float centerY = 0;
 
+	void Awake() {
+		// Find the objects in the scene
+		player = Object.FindObjectOfType<PlayerControl> ();
+		opponent = Object.FindObjectOfType<OpponentControl> ();
+		shakezone = Object.FindObjectOfType<ShakeZone> ();
+	}
 
 	void Start ()
 	{
-		player = Object.FindObjectOfType<PlayerControl> ();
-		opponent = Object.FindObjectOfType<OpponentControl> ();
-
 		switch (_currentHandStage) {
 		case handStage.ReadyGo:
 			OnReadyGo ();
@@ -127,10 +131,11 @@ public class MasterGame : MonoBehaviour
 
 	void OnShake() {
 		Debug.Log ("Shake has begun!");
+		shakezone.gameObject.SetActive (true);
 	}
 
 	void OnSuccess() {
-
+		
 	}
 
 	void OnFailure() {

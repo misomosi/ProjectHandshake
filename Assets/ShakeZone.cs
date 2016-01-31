@@ -19,10 +19,17 @@ public class ShakeZone : MonoBehaviour {
 	void Start () {
 		startPosition = transform.position;
 		currentHealth = maxHealth;
+
+		// Disable if we aren't in the correct state. MasterGame will enable us at the appropriate time
+		if (MasterGame.instance.currentHandStage != MasterGame.handStage.Shake) {
+			gameObject.SetActive (false);
+		}
 	}
 
 	void Update () {
-		
+
+		//CalcOutside ();
+
 		Vector3 moveDirection = new Vector3 (-mapSpeed,0,0);
 		transform.position += moveDirection * Time.deltaTime;
 
@@ -44,10 +51,23 @@ public class ShakeZone : MonoBehaviour {
 		GetComponent<Ferr2DT_PathTerrain> ().Build ();
 	}
 
+
 	void OnTriggerEnter2D (Collider2D other) {
 		isOutside = false;
 	}
 	void OnTriggerExit2D (Collider2D other) {
 		isOutside = true;
 	}
+
+
+	void CalcOutside() {
+		Vector2 playerpos = MasterGame.instance.player.transform.position;
+		Collider2D touchingCollider = Physics2D.OverlapCircle (playerpos, 0.3f);
+		if (touchingCollider == GetComponent<Collider2D> ()) {
+			isOutside = true;
+		} else {
+			isOutside = false;
+		}
+	}
+		
 }
