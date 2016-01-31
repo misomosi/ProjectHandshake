@@ -95,6 +95,7 @@
      <None Include="Assets\Ferr\2DTerrain\Shaders\UnlitColored.shader" />
      <None Include="Assets\Ferr\2DTerrain\Shaders\Ferr2DTCommon.cginc" />
      <None Include="Assets\Ferr\Common\Shaders\GizmoShader3D.shader" />
+     <None Include="Assets\Color Behavior\README.txt" />
      <None Include="Assets\Ferr\Common\Shaders\LitVertexColor.shader" />
      <None Include="Assets\Ferr\2DTerrain\Shaders\LitColoredTintTransparent.shader" />
      <None Include="Assets\Ferr\2DTerrain\Shaders\UnlitColoredTintTransparent.shader" />
@@ -105,6 +106,7 @@
      <None Include="Assets\Ferr\2D\Scripts\poly2tri.cs\LICENSE.txt" />
      <None Include="Assets\Ferr\Common\Shaders\UnlitVertexColorTex.shader" />
      <None Include="Assets\Ferr\2DTerrain\Shaders\UnlitWavyTransparent.shader" />
+     <None Include="Assets\Color Behavior\Standard Assets\SSAOShader.shader" />
      <None Include="Assets\Ferr\2D\Scripts\poly2tri.cs\AUTHORS.txt" />
      <None Include="Assets\Ferr\Common\Shaders\UnlitVertexColorTexTransparent.shader" />
      <None Include="Assets\Ferr\Common\Shaders\ShadowOnly.shader" />

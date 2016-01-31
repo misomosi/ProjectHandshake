@@ -47,6 +47,9 @@
   <ItemGroup>
      <Compile Include="Assets\BezierCurves\Scripts\BezierCurve.cs" />
      <Compile Include="Assets\BezierCurves\Scripts\BezierPoint.cs" />
+     <Compile Include="Assets\Color Behavior\ColorBehavior.cs" />
+     <Compile Include="Assets\Color Behavior\Standard Assets\ScreenSpaceAmbientOcclusion.cs" />
+     <Compile Include="Assets\Color Behavior\Standard Assets\SimpleShowcase.cs" />
      <Compile Include="Assets\Ferr\2D\Scripts\Ferr2D_DynamicMesh.cs" />
      <Compile Include="Assets\Ferr\2D\Scripts\Ferr2D_IPath.cs" />
      <Compile Include="Assets\Ferr\2D\Scripts\Ferr2D_Path.cs" />
@@ -106,10 +109,13 @@
      <Compile Include="Assets\Ferr\Common\Scripts\LogoLock.cs" />
      <Compile Include="Assets\Ferr\Common\Scripts\RenderUtility.cs" />
      <Compile Include="Assets\Ferr\Common\Scripts\SOUtil.cs" />
+     <Compile Include="Assets\Grip.cs" />
      <Compile Include="Assets\GripBar.cs" />
+     <Compile Include="Assets\MasterGame.cs" />
      <Compile Include="Assets\Momentum.cs" />
      <Compile Include="Assets\OpponentControl.cs" />
      <Compile Include="Assets\PlayerControl.cs" />
+     <Compile Include="Assets\ShakeZone.cs" />
      <None Include="Assets\Ferr\2DTerrain\Shaders\UnlitColoredTint.shader" />
      <None Include="Assets\Ferr\Common\Data\cache.txt" />
      <None Include="Assets\Ferr\2DTerrain\Shaders\UnitColoredTransparent.shader" />
@@ -122,6 +128,7 @@
      <None Include="Assets\Ferr\2DTerrain\Shaders\UnlitColored.shader" />
      <None Include="Assets\Ferr\2DTerrain\Shaders\Ferr2DTCommon.cginc" />
      <None Include="Assets\Ferr\Common\Shaders\GizmoShader3D.shader" />
+     <None Include="Assets\Color Behavior\README.txt" />
      <None Include="Assets\Ferr\Common\Shaders\LitVertexColor.shader" />
      <None Include="Assets\Ferr\2DTerrain\Shaders\LitColoredTintTransparent.shader" />
      <None Include="Assets\Ferr\2DTerrain\Shaders\UnlitColoredTintTransparent.shader" />
@@ -132,6 +139,7 @@
      <None Include="Assets\Ferr\2D\Scripts\poly2tri.cs\LICENSE.txt" />
      <None Include="Assets\Ferr\Common\Shaders\UnlitVertexColorTex.shader" />
      <None Include="Assets\Ferr\2DTerrain\Shaders\UnlitWavyTransparent.shader" />
+     <None Include="Assets\Color Behavior\Standard Assets\SSAOShader.shader" />
      <None Include="Assets\Ferr\2D\Scripts\poly2tri.cs\AUTHORS.txt" />
      <None Include="Assets\Ferr\Common\Shaders\UnlitVertexColorTexTransparent.shader" />
      <None Include="Assets\Ferr\Common\Shaders\ShadowOnly.shader" />

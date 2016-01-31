@@ -93,6 +93,12 @@ public class PlayerControl : MonoBehaviour {
 	void DoShakePhase() {
 		Vector3 playerInput = new Vector3(0, Input.GetAxis ("Mouse Y") * shakeMouseSensitivity, 0);
 		transform.position += playerInput;
+		Vector3 MaxPos = Camera.main.ViewportToWorldPoint(new Vector2(1,1));
+		Vector3 MinPos = Camera.main.ViewportToWorldPoint(new Vector2(0,0));
+		float clampedY = Mathf.Clamp (transform.position.y, MinPos.y, MaxPos.y);
+		transform.position = new Vector3 (transform.position.x, clampedY, transform.position.z);
+		//transform.position = Camera.main.ViewportToWorldPoint(new Vector2(1,1));
+
 	}
 
 	void AttemptGrip() {
