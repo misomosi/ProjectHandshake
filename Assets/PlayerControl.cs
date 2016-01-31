@@ -5,7 +5,7 @@ public class PlayerControl : MonoBehaviour {
 
 	[Header("Approach Stage")]
 	public float verticalVelocityScale = 1.0f;
-	public float speed = 0;
+	private float speed = 0;
 	public float forwardAcceleration = 1.0f;
 	public float minSpeed = 0.1f;
 	public float friction = 0.2f;
@@ -77,7 +77,7 @@ public class PlayerControl : MonoBehaviour {
 			speed += forwardAcceleration * Time.deltaTime;
 		} else {
 			if (Mathf.Abs (speed) < minSpeed)
-				speed = 0;
+				speed = minSpeed;
 		}
 		speed -= speed * friction;
 		pos.x += speed * Time.deltaTime;
