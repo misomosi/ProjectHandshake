@@ -67,16 +67,6 @@ public class PlayerControl : MonoBehaviour {
 			DoShakePhase();
 			break;
 		}
-
-		if (Input.GetButtonDown ("Fire1")) {
-			Cursor.lockState = CursorLockMode.Locked;
-			Cursor.visible = false;
-		}
-		if (Input.GetButtonDown ("Cancel")) {
-			Cursor.lockState = CursorLockMode.None;
-			Cursor.visible = true;
-		}
-
 	}
 
 	void DoMovementPhase () {
@@ -132,6 +122,9 @@ public class PlayerControl : MonoBehaviour {
 		transform.position = new Vector3 (transform.position.x, clampedY, transform.position.z);
 
 		handSprite.sprite = claspedImageSucces;
+
+		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
 	}
 
 	void AttemptGrip() {
