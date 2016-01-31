@@ -36,8 +36,6 @@ public class ShakeZone : MonoBehaviour {
 
 		percentHealth = currentHealth / maxHealth;
 
-		print ("Current Health: " + percentHealth);
-
 		if (currentHealth <= 0) {
 			print ("GAME OVER");
 		}
