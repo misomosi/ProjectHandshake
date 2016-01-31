@@ -38,9 +38,22 @@ public class MasterGame : MonoBehaviour
 	[Header ("MainGame")]
 	public bool gameOver = false;
 	public gameStage currentGameStage;
+	public SuccessPanel successPanel;
+	public FailurePanel failurePanel;
 	public handStage currentHandStage {
 		get{ return _currentHandStage; }
 		set {
+			if (_currentHandStage == value) {
+				return;
+			}
+			switch (_currentHandStage) {
+			case handStage.Joust:
+				ExitJoust ();
+				break;
+			case handStage.Shake:
+				ExitShake ();
+				break;
+			}
 			_currentHandStage = value;
 			switch (_currentHandStage) {
 			case handStage.ReadyGo:
@@ -88,6 +101,8 @@ public class MasterGame : MonoBehaviour
 		player = Object.FindObjectOfType<PlayerControl> ();
 		opponent = Object.FindObjectOfType<OpponentControl> ();
 		shakezone = Object.FindObjectOfType<ShakeZone> ();
+		successPanel = Object.FindObjectOfType<SuccessPanel> ();
+		failurePanel = Object.FindObjectOfType<FailurePanel> ();
 
 		// Determine which level this is
 		
@@ -141,13 +156,23 @@ public class MasterGame : MonoBehaviour
 	}
 
 	void OnSuccess() {
-		
+		Debug.Log ("Success!");
+		successPanel.gameObject.SetActive (true);
 	}
 
 	void OnFailure() {
 		gameOver = true;
-
+		Debug.Log ("Failure!");
+		successPanel.gameObject.SetActive (true);
 		// Show the failure screen
+	}
+
+	void ExitJoust () {
+
+	}
+
+	void ExitShake () {
+		shakezone.gameObject.SetActive (false);
 	}
 
 	//functions here, if needed
