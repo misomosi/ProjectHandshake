@@ -13,6 +13,11 @@ public class OpponentControl : MonoBehaviour {
 	public float tSpeed = 1.0f;
 	public phase currentPhase = phase.approach;
 
+	[Header("General")]
+	public Sprite openImage;
+	public Sprite claspedImageSucces;
+	public Sprite claspedImageFailure;
+
 	void OnAwake() {
 		path = GameObject.Find ("OpponentCurve").GetComponent<BezierCurve> ();
 	}

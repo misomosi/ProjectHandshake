@@ -31,6 +31,7 @@ public class PlayerControl : MonoBehaviour {
 
 	private GripBar gripBar;
 	private SpriteRenderer handSprite;
+	private SpriteRenderer oppSprite;
 
 	// Use this for initialization
 	void Start () {
@@ -42,6 +43,9 @@ public class PlayerControl : MonoBehaviour {
 		handSprite = GetComponentInChildren<SpriteRenderer> ();
 		opponent = Object.FindObjectOfType<OpponentControl> ();
 		handSprite.sprite = openImage;
+
+		oppSprite = GetComponentInChildren<SpriteRenderer> ();
+		oppSprite.sprite = openImage;
 	}
 	
 	// Update is called once per frame
@@ -132,7 +136,6 @@ public class PlayerControl : MonoBehaviour {
 		if (Vector2.Distance(myGripPos, otherGripPos) < myGripPointObj.GetComponent<CircleCollider2D> ().radius) {
 			// We're in range!!
 			speed = 0;
-			//handSprite.color = Color.green;
 			// Move to next phase
 			handSprite.sprite = claspedImageSucces;
 			MasterGame.instance.currentHandStage = MasterGame.handStage.AutoCenter;
