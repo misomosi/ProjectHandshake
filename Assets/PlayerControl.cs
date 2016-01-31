@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PlayerControl : MonoBehaviour {
 
+	[Header("Approach Stage")]
 	public float verticalVelocityScale = 1.0f;
 	public float speed = 0;
 	public float forwardAcceleration = 1.0f;
@@ -17,12 +18,16 @@ public class PlayerControl : MonoBehaviour {
 
 	public Vector2 initialMousePos;
 
+	[Header("Shake Stage")]
+	public float shakeMouseSensitivity = 1.0f;
+
+
 	public enum phase
 	{
 		approach,
 		shake
 	}
-
+	[Header("General")]
 	public phase currentPhase = phase.approach;
 
 	private GripBar gripBar;
@@ -50,6 +55,16 @@ public class PlayerControl : MonoBehaviour {
 			DoShakePhase();
 			break;
 		}
+
+		if (Input.GetButtonDown ("Fire1")) {
+			Cursor.lockState = CursorLockMode.Locked;
+			Cursor.visible = false;
+		}
+		if (Input.GetButtonDown ("Cancel")) {
+			Cursor.lockState = CursorLockMode.None;
+			Cursor.visible = true;
+		}
+
 	}
 
 	void DoMovementPhase () {
@@ -76,7 +91,8 @@ public class PlayerControl : MonoBehaviour {
 	}
 
 	void DoShakePhase() {
-
+		Vector3 playerInput = new Vector3(0, Input.GetAxis ("Mouse Y") * shakeMouseSensitivity, 0);
+		transform.position += playerInput;
 	}
 
 	void AttemptGrip() {
