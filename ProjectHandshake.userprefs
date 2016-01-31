@@ -1,8 +1,10 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\WinZone.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\MusicManager.cs">
     <Files>
-      <File FileName="Assets\WinZone.cs" Line="14" Column="72" />
+      <File FileName="Assets\MusicManager.cs" Line="30" Column="36" />
+      <File FileName="Assets\MasterGame.cs" Line="161" Column="25" />
+      <File FileName="Assets\PlayerControl.cs" Line="151" Column="23" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
