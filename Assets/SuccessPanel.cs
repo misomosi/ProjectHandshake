@@ -18,6 +18,6 @@ public class SuccessPanel : MonoBehaviour {
 	}
 
 	public void OnNextClick() {
-
+		MasterGame.instance.LoadNextScene ();
 	}
 }

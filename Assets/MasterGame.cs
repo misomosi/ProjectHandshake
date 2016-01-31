@@ -41,6 +41,15 @@ public class MasterGame : MonoBehaviour
 	public handStage currentHandStage {
 		get{ return _currentHandStage; }
 		set {
+			if (value == _currentHandStage)
+				return;
+
+			if (_currentHandStage == handStage.Joust) {
+				OnExitJoust ();
+			} else if (_currentHandStage == handStage.Shake) {
+				OnExitShake ();
+			}
+
 			_currentHandStage = value;
 			switch (_currentHandStage) {
 			case handStage.ReadyGo:
@@ -65,6 +74,9 @@ public class MasterGame : MonoBehaviour
 		}
 	}
 	public handStage _currentHandStage;
+
+	public SuccessPanel successPanel;
+	public FailurePanel failurePanel;
 
 
 	//[Header("Grip")]
@@ -151,7 +163,15 @@ public class MasterGame : MonoBehaviour
 			winSound.Play ();
 			hasPlayedOnce = true;
 		}
+		successPanel.gameObject.SetActive (true);
+	}
 
+	void OnExitJoust() {
+
+	}
+
+	void OnExitShake() {
+		shakezone.gameObject.SetActive (false);
 	}
 
 	void OnFailure() {
@@ -161,6 +181,7 @@ public class MasterGame : MonoBehaviour
 			hasPlayedOnce = true;
 		}
 		// Show the failure screen
+		failurePanel.gameObject.SetActive(true);
 	}
 
 	//functions here, if needed

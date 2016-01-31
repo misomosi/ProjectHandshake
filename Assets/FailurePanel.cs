@@ -14,6 +14,6 @@ public class FailurePanel : MonoBehaviour {
 	}
 
 	public void OnRestartClick() {
-
+		MasterGame.instance.Restart ();
 	}
 }
