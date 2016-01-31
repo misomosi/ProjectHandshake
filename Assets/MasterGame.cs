@@ -152,32 +152,9 @@ Failure}
 	}
 
 	void OnFailure() {
+		gameOver = true;
 
-	}
-	
-	// Update is called once per frame
-	void UpdateDISABLED ()
-	{
-		if (gameOver == false) {
-
-			//tests for currentGameStage
-
-			isGrab = player.isGrab;
-			if (isGrab == true) {
-				currentHandStage = handStage.AutoCenter;
-				player.SendMessage ("AutoCenter");
-				opponent.SendMessage ("AutoCenter");
-			}
-
-			/*
-				if (autocenter is complete){
-					currentHandStage = handStage.Shake;
-				}
-				*/
-
-
-
-		}
+		// Show the failure screen
 	}
 
 	//functions here, if needed
