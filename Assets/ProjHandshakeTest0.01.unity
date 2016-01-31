@@ -239,6 +239,7 @@ MonoBehaviour:
   friction: 0.01
   gripStrength: 0
   gripChangeSpeed: 1
+  verticalSmoothing: 0.2
   isGrab: 0
   opponent: {fileID: 0}
   initialMousePos: {x: 0, y: 0}

@@ -11,6 +11,9 @@ public class PlayerControl : MonoBehaviour {
 	public float friction = 0.2f;
 	public float gripStrength = 0.0f;
 	public float gripChangeSpeed = 1.0f;
+	public float verticalSmoothing = 1.0f;
+	public float verticalMaxSpeed = 5.0f;
+	private float verticalSpeed;
 
 	public bool isGrab = false;
 
@@ -67,7 +70,7 @@ public class PlayerControl : MonoBehaviour {
 	void DoMovementPhase () {
 		Vector2 mousePos = Camera.main.ScreenPointToRay (Input.mousePosition).origin;
 		Vector2 pos = transform.position;
-		pos.y = mousePos.y; // * verticalVelocityScale;
+		pos.y = Mathf.SmoothDamp (pos.y, mousePos.y, ref verticalSpeed, verticalSmoothing);
 		
 		// Add forward velocity when the player hold accelerator
 		if (Input.GetButton ("Accelerate")) {
@@ -111,6 +114,10 @@ public class PlayerControl : MonoBehaviour {
 	void DoShakePhase() {
 		Vector3 playerInput = new Vector3(0, Input.GetAxis ("Mouse Y") * shakeMouseSensitivity, 0);
 		transform.position += playerInput;
+		Vector3 MaxPos = Camera.main.ViewportToWorldPoint(new Vector2(1,1));
+		Vector3 MinPos = Camera.main.ViewportToWorldPoint(new Vector2(0,0));
+		float clampedY = Mathf.Clamp (transform.position.y, MinPos.y, MaxPos.y);
+		transform.position = new Vector3 (transform.position.x, clampedY, transform.position.z);
 	}
 
 	void AttemptGrip() {

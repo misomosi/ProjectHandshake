@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum gameStage {Intro,Tutorial,Baby,HighSchool,Boss,GameOver};
 public class MasterGame : MonoBehaviour
 {
 
@@ -28,27 +29,8 @@ public class MasterGame : MonoBehaviour
 
 	//main game variables used to switch between different levels and control game progression.
 
-	public enum gameStage
-	{
-Intro,
-Tutorial,
-Baby,
-HighSchool,
-Boss,
-GameOver}
 
-	;
-
-	public enum handStage
-	{
-ReadyGo,
-Joust,
-AutoCenter,
-Shake,
-Success,
-Failure}
-
-	;
+	public enum handStage {ReadyGo,Joust,AutoCenter,Shake,Success,Failure};
 
 	[Header ("MainGame")]
 	public bool gameOver = false;
@@ -152,35 +134,15 @@ Failure}
 	}
 
 	void OnFailure() {
+		gameOver = true;
 
-	}
-	
-	// Update is called once per frame
-	void UpdateDISABLED ()
-	{
-		if (gameOver == false) {
-
-			//tests for currentGameStage
-
-			isGrab = player.isGrab;
-			if (isGrab == true) {
-				currentHandStage = handStage.AutoCenter;
-				player.SendMessage ("AutoCenter");
-				opponent.SendMessage ("AutoCenter");
-			}
-
-			/*
-				if (autocenter is complete){
-					currentHandStage = handStage.Shake;
-				}
-				*/
-
-
-
-		}
+		// Show the failure screen
 	}
 
 	//functions here, if needed
+	public void HandFailure(){
+		currentHandStage = handStage.Failure;
+	}
 
 	public void OnDestroy ()
 	{
