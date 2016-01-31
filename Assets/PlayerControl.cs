@@ -118,6 +118,8 @@ public class PlayerControl : MonoBehaviour {
 		Vector3 MinPos = Camera.main.ViewportToWorldPoint(new Vector2(0,0));
 		float clampedY = Mathf.Clamp (transform.position.y, MinPos.y, MaxPos.y);
 		transform.position = new Vector3 (transform.position.x, clampedY, transform.position.z);
+
+		handSprite.sprite = claspedImageSucces;
 	}
 
 	void AttemptGrip() {

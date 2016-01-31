@@ -338,7 +338,8 @@ MonoBehaviour:
   shakeMouseSensitivity: 1
   openImage: {fileID: 0}
   claspedImageSucces: {fileID: 0}
-  claspedImageFailure: {fileID: 0}
+  claspedImageFailure: {fileID: 21300000, guid: 6b9191af17187004e80233d495689028,
+    type: 3}
 --- !u!58 &971003503
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -407,6 +408,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 499502, guid: 8f3ad19085f40481c8e4fa2113139766, type: 2}
       propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11445014, guid: 8f3ad19085f40481c8e4fa2113139766, type: 2}
+      propertyPath: _currentHandStage
       value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
