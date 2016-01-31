@@ -185,7 +185,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 343721369}
   - 61: {fileID: 343721367}
-  - 114: {fileID: 343721370}
   - 114: {fileID: 343721371}
   m_Layer: 0
   m_Name: PlayerHand
@@ -222,17 +221,6 @@ Transform:
   - {fileID: 1148786905}
   m_Father: {fileID: 0}
   m_RootOrder: 3
---- !u!114 &343721370
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 343721366}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e846cfff961348a1bf0ef2263c09e88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &343721371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,7 +242,11 @@ MonoBehaviour:
   isGrab: 0
   opponent: {fileID: 0}
   initialMousePos: {x: 0, y: 0}
-  currentPhase: 0
+  shakeMouseSensitivity: 1
+  openImage: {fileID: 21300000, guid: de3615f52725a489eb77ae91ed33105f, type: 3}
+  claspedImageSucces: {fileID: 21300000, guid: 04a884565ee4e48d089e95892bae1359, type: 3}
+  claspedImageFailure: {fileID: 21300000, guid: e8270cecf9a4d4ec98f685af933fbcc9,
+    type: 3}
 --- !u!1 &388552435
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,9 +269,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 388552435}
-  m_LocalRotation: {x: 0, y: 0, z: -0.19274649, w: 0.9812486}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.24, y: -0.57, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 343721369}
   m_RootOrder: 0
@@ -309,7 +301,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: caaf1558c96c14e5aa65277a60e0faf5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: de3615f52725a489eb77ae91ed33105f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -649,9 +641,56 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: 0.41, y: -0.36}
+  m_Offset: {x: 0.06, y: -0.09}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.6
+--- !u!1 &1204210079
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1204210081}
+  - 114: {fileID: 1204210080}
+  m_Layer: 0
+  m_Name: MasterGame
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1204210080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1204210079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 217d7128914334aa9b7569f9ebbe054b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameOver: 0
+  currentGameStage: 0
+  _currentHandStage: 1
+  AutoCenterTime: 2
+  player: {fileID: 0}
+  opponent: {fileID: 0}
+  centerX: 0
+  centerY: 0
+--- !u!4 &1204210081
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1204210079}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
 --- !u!1 &1262158372
 GameObject:
   m_ObjectHideFlags: 0

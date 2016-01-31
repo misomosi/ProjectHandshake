@@ -2,7 +2,27 @@
 using System.Collections;
 
 public enum gameStage {Intro,Tutorial,Baby,HighSchool,Boss,GameOver};
-public class MasterGame : MonoBehaviour {
+public class MasterGame : MonoBehaviour
+{
+
+	// Singleton behavior
+	public static MasterGame instance {
+		get {
+			if (applicationIsQuitting) {
+				Debug.LogWarning ("[Singleton] Instance MasterGame '" +
+				"' already destroyed on application quit." +
+				" Won't create again - returning null.");
+				return null;
+			}
+			if (_instance == null) {
+				_instance = FindObjectOfType<MasterGame> ();
+			}
+			return _instance;
+		}
+	}
+
+	private static MasterGame _instance;
+	private static bool applicationIsQuitting = false;
 
 	// Use this for initialization
 
@@ -12,43 +32,148 @@ public class MasterGame : MonoBehaviour {
 
 	public enum handStage {ReadyGo,Joust,AutoCenter,Shake,Success,Failure};
 	[Header("MainGame")]
+	public enum gameStage
+	{
+Intro,
+Tutorial,
+Baby,
+HighSchool,
+Boss,
+GameOver}
+
+	;
+
+	public enum handStage
+	{
+ReadyGo,
+Joust,
+AutoCenter,
+Shake,
+Success,
+Failure}
+
+	;
+
+	[Header ("MainGame")]
 	public bool gameOver = false;
 	public gameStage currentGameStage;
-	public handStage currentHandStage;
+	public handStage currentHandStage {
+		get{ return _currentHandStage; }
+		set {
+			_currentHandStage = value;
+			switch (_currentHandStage) {
+			case handStage.ReadyGo:
+				OnReadyGo ();
+				break;
+			case handStage.Joust:
+				OnJoust ();
+				break;
+			case handStage.AutoCenter:
+				OnAutoCenter ();
+				break;
+			case handStage.Shake:
+				OnShake ();
+				break;
+			case handStage.Success:
+				OnSuccess ();
+				break;
+			case handStage.Failure:
+				OnFailure ();
+				break;
+			}
+		}
+	}
+	public handStage _currentHandStage;
 
 
 	//[Header("Grip")]
 	bool gripLost;
 
-	[Header("PlayerHand")]
+	[Header ("PlayerHand")]
 	bool isGrab;
 	float handShakeX;
-	public float handAutoDragSpeed;
+	public float AutoCenterTime = 2.0f;
 	public PlayerControl player;
+	public OpponentControl opponent;
 	bool autoCenterComplete = false;
 
-	[Header("Screen Constants")]
+	[Header ("Screen Constants")]
 	public float centerX = 0;
 	public float centerY = 0;
 
 
-	void Start () {
-		player = Object.FindObjectOfType<PlayerControl>();
+	void Start ()
+	{
+		player = Object.FindObjectOfType<PlayerControl> ();
+		opponent = Object.FindObjectOfType<OpponentControl> ();
+
+		switch (_currentHandStage) {
+		case handStage.ReadyGo:
+			OnReadyGo ();
+			break;
+		case handStage.Joust:
+			OnJoust ();
+			break;
+		case handStage.AutoCenter:
+			OnAutoCenter ();
+			break;
+		case handStage.Shake:
+			OnShake ();
+			break;
+		case handStage.Success:
+			OnSuccess ();
+			break;
+		case handStage.Failure:
+			OnFailure ();
+			break;
+		}
+	}
+
+	// These get called whenever we change to the new corresponding state
+	void OnReadyGo() {
+
+	}
+
+	void OnJoust() {
+		opponent.StopAllCoroutines ();
+		opponent.SendMessage ("Joust");
+	}
+
+	void OnAutoCenter() {
+		player.StopAllCoroutines ();
+		opponent.StopAllCoroutines ();
+
+		player.SendMessage ("AutoCenter");
+		Destroy (opponent.gameObject);
+	}
+
+	void OnShake() {
+		Debug.Log ("Shake has begun!");
+	}
+
+	void OnSuccess() {
+
+	}
+
+	void OnFailure() {
+
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		if(gameOver==false){
+	void UpdateDISABLED ()
+	{
+		if (gameOver == false) {
 
 			//tests for currentGameStage
 
-				isGrab = player.isGrab;
-				if (isGrab == true){
-					currentHandStage = handStage.AutoCenter;
-					player.SendMessage("autoCenter");
-				}
+			isGrab = player.isGrab;
+			if (isGrab == true) {
+				currentHandStage = handStage.AutoCenter;
+				player.SendMessage ("AutoCenter");
+				opponent.SendMessage ("AutoCenter");
+			}
 
-				/*
+			/*
 				if (autocenter is complete){
 					currentHandStage = handStage.Shake;
 				}
@@ -64,4 +189,8 @@ public class MasterGame : MonoBehaviour {
 		currentHandStage = handStage.Failure;
 	}
 
+	public void OnDestroy ()
+	{
+		applicationIsQuitting = true;
+	}
 }
