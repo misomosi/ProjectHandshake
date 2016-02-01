@@ -14,6 +14,7 @@ public class FailurePanel : MonoBehaviour {
 	}
 
 	public void OnRestartClick() {
-		MasterGame.instance.Restart ();
+		if(MasterGame.instance.currentHandStage == MasterGame.handStage.Failure)
+			MasterGame.instance.Restart ();
 	}
 }

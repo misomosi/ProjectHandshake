@@ -6,10 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/ProjHandshakeTest0.01.unity
-  - enabled: 1
-    path: Assets/ProjHandshakeTest0.02.unity
+    path: Assets/ProjHandshakeTest0.06.unity
   - enabled: 1
     path: Assets/ProjHandshakeTest0.03.unity
   - enabled: 1
-    path: Assets/ProjHandshakeTest0.04.unity
+    path: Assets/ProjHandshakeTest0.05.unity
+  - enabled: 1
+    path: Assets/gameover.unity

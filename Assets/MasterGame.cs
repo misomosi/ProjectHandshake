@@ -106,6 +106,7 @@ public class MasterGame : MonoBehaviour
 		shakezone = Object.FindObjectOfType<ShakeZone> ();
 		winSound = GameObject.Find ("WinEffect").GetComponent<AudioSource>();
 		loseSound = GameObject.Find ("LoseEffect").GetComponent<AudioSource>();
+		successPanel = FindObjectOfType<SuccessPanel> ();
 
 		// Determine which level this is
 		
@@ -113,6 +114,7 @@ public class MasterGame : MonoBehaviour
 
 	void Start ()
 	{
+		GameObject.Find("Canvas").SetActive(true);
 		switch (_currentHandStage) {
 		case handStage.ReadyGo:
 			OnReadyGo ();
@@ -143,6 +145,8 @@ public class MasterGame : MonoBehaviour
 	void OnJoust() {
 		opponent.StopAllCoroutines ();
 		opponent.SendMessage ("Joust");
+		Cursor.lockState = CursorLockMode.None;
+		Cursor.visible = true;
 	}
 
 	void OnAutoCenter() {
@@ -156,6 +160,8 @@ public class MasterGame : MonoBehaviour
 	void OnShake() {
 		Debug.Log ("Shake has begun!");
 		shakezone.gameObject.SetActive (true);
+		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
 	}
 
 	void OnSuccess() {
@@ -198,6 +204,10 @@ public class MasterGame : MonoBehaviour
 		if (Input.GetKeyDown ("r")) {
 			Restart ();
 		}
+		if (Input.GetButtonDown ("Cancel")) {
+			Cursor.lockState = CursorLockMode.None;
+			Cursor.visible = true;
+		}
 	}
 
 	public void Restart () {
@@ -209,9 +219,6 @@ public class MasterGame : MonoBehaviour
 	public void LoadNextScene () {
 		Scene currentScene = SceneManager.GetActiveScene ();
 		_instance = null;
-		if (currentScene.buildIndex == 3)
-			Application.Quit ();
-		else
-			SceneManager.LoadScene (currentScene.buildIndex + 1);
+		SceneManager.LoadScene (currentScene.buildIndex + 1);
 	}
 }

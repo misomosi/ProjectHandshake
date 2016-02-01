@@ -11,3 +11,5 @@ Assets/Ferr/2DTerrain/TerrainMaterials/GrayTerrainMaterial.prefab
 
 [Ferr2DT_PathTerrain]
 Assets/Prefab/ShakeZone02.prefab
+Assets/Prefab/ShakeZone04.prefab
+Assets/Prefab/ShakeZone01.prefab

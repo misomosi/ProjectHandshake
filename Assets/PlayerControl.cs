@@ -123,8 +123,7 @@ public class PlayerControl : MonoBehaviour {
 
 		handSprite.sprite = claspedImageSucces;
 
-		Cursor.lockState = CursorLockMode.Locked;
-		Cursor.visible = false;
+
 	}
 
 	void AttemptGrip() {
